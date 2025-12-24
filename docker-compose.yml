@@ -1,0 +1,28 @@
+services:
+  proxock:
+    build: .
+    container_name: proxock
+    network_mode: host
+    privileged: true
+    dns:
+      - 2a07:a8c0::75:3e37
+      - 2a07:a8c1::75:3e37
+      - 45.90.28.159
+      - 45.90.30.159
+    environment:
+      - SERVICE_URL_PROXOCK_8778
+      - SUBNET=${SUBNET:-}
+      - BIND=${BIND:-}
+      - TUN_IF=${TUN_IF:-tun7}
+      - HE_SERVER_V4=${HE_SERVER_V4:-}
+      - MY_V4=${MY_V4:-}
+      - HE_TUN_CLIENT6=${HE_TUN_CLIENT6:-}
+      - HE_TUN_SERVER6=${HE_TUN_SERVER6:-}
+      - HE_TUN_MTU=${HE_TUN_MTU:-} 
+      - ROUTED_SUBNET=${SUBNET:-} 
+      - WORKERS=${WORKERS:-}
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+
